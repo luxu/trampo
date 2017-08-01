@@ -1,0 +1,72 @@
+<?php $total = 0; ?>
+<div class="container"  ng-controller="TrampoCtrl">
+  <div class="jumbotron">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3>Listar POR TECNOLOGIA</h3>
+      </div>
+      <div class="panel-body">
+      <form method="post" action="#" class="form-vertical">
+          <div class="form-group">
+            <div class="col-sm-10">
+            <label>
+                <input type="radio" value="GET" ng-model="dados" ng-checked="true" />  GET
+            </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-10">
+            <label>
+                <input type="radio" value="CIELO" ng-model="dados" />  CIELO
+            </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-10">
+            <label>
+                <input type="radio" value="STONE" ng-model="dados" />  STONE
+            </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-10">
+            <label>
+                <input type="radio" value="ELAVON" ng-model="dados" />  ELAVON
+            </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-10">
+            <label>
+                <input type="radio" value="todos" ng-model="dados" />  TODOS
+            </label>
+            </div>
+          </div>
+          <input type="hidden" name="tipo" ng-init="tipo='portecnologia';" ng-value="tipo"/>
+            <div class="form-group">
+              <div class="col-sm-10">
+                <input type="button" value="Pesquisar" class="btn btn-primary"
+                          ng-click="consultaPorTecnologia(dados)"
+                          ng-model="searchText[dados]"
+                          ng-init="searchText = {}; dados='GET'" />
+              </div>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive"  ng-show="registros.length>0">
+      <table class="table table-condensed table-bordered">
+        <tr ng-show="registros.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Nenhum dado encontrado</td></tr>
+        <tr ng-hide="registros.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Carregando...</td></tr>
+        <tr><th ng-repeat="c in consultas">{{c.text}}</th></tr>
+        <tr dir-paginate="c in registros | itemsPerPage:10 | filter:filterTrampo | orderBy:'-id' track by $index" class="warning" id="{{c.id}}" ng-animate="'animate'
+          animate-on-change='c.id + c.data + c.ec + c.nroos + c.conclusao + c.valor' ">
+          <td>{{c.id}}</td><td>{{c.data | date:'dd/MM/yyyy'}}</td><td>{{c.ec}}</td><td>{{c.nroos}}</td><td>{{c.conclusao}}</td><td>{{c.valor | currency:'R$ '}}</td>
+        </tr>
+      </table>
+      <div><p>Total (R$): {{totalDinheiro | currency:'R$ '}}</p></div>
+      <div><p>Total (Máquinas): {{totalMaquina}}</p></div>
+      <dir-pagination-controls max-size="5" boundary-links="true"></dir-pagination-controls>
+    </div>
+</div>

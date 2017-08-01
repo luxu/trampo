@@ -1,0 +1,57 @@
+<h3>Editar Peças</h3>
+
+<form class="form-horizontal">
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="data">Data:</label>
+        <div class="col-sm-5 demo-section k-content">
+            <input type="text" name="data" id="data" ng-model="PecasEditar.pecas.data" required="required" my-date="YYYY-MM-DD">
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="veiculo">Veículo:</label>
+      <div class="col-sm-5">
+        <div class="radio" data-ng-repeat="option in PecasEditar.tipoPecasEditar">
+          <label>
+            <input type="radio" name="veiculo" ng-value="option" data-ng-model="PecasEditar.form.veiculo" />{{ option }}
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="troca">Troca:</label>
+        <div class="col-sm-5">
+            <input type="text" name="troca" id="troca" ng-model="PecasEditar.pecas.troca" required="required" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="proxtroca">Próx. Troca:</label>
+        <div class="col-sm-5">
+            <input type="text" name="proxtroca" id="proxtroca" ng-model="PecasEditar.pecas.proxtroca" required="required" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="local">Local:</label>
+        <div class="col-sm-5">
+            <input type="text" name="local" id="local" ng-model="PecasEditar.pecas.local" required="required" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="comercio">Comércio:</label>
+        <div class="col-sm-5">
+            <input type="text" name="comercio" id="comercio" ng-model="PecasEditar.pecas.comercio" required="required" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a href="#/pecas" class="btn btn-default">Voltar</a>
+        </div>
+    </div>
+</form>

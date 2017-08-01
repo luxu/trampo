@@ -1,0 +1,20 @@
+# Para todos os arquivos e sub-pastas localizados na pasta vendor/
+#bin/
+#config/
+#data/
+vendor/
+module/Application/language/
+composer.*
+# public/css/
+# public/fonts/
+# public/data/
+# public/img/
+# public/js/
+/nbproject/private/
+*.txt
+server.bat
+.htaccess
+public/backup.php
+public/backup2.php
+public/backup3.php
+public/qt.php

@@ -1,0 +1,54 @@
+<h2>Listagem dos itens da peça</h2>
+<a href="#/itenspecas/novo/{{ItensPecas.idPecas}}" class="btn btn-danger fa fa-plus">&nbsp;Adicionar Novo Item</a>
+<div class="table-responsive">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Listagem
+      <div class="sw-search" >
+          <div class="nav-search" id="nav-search">
+              <input placeholder="o que você está procurando?" class="nav-search-input" data-ng-model="searchItensPecas" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+          </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Peças_ID</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th>Total</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tr ng-show="ItensPecas.registros==0">
+          <td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Nenhum dado encontrado</td>
+        </tr>
+
+        <tr
+        ng-repeat="c in ItensPecas.registros | filter:searchItensPecas | orderBy:'-data'" id="{{c.id}}"
+        animate-on-change='c.id + c.pecas.id + c.descricao + c.preco + c.total + c.qtd'
+        ng-animate="'animate'"
+        >
+            <!-- <tr ng-hide="ItensPecas.registros.length>-1">
+              <td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Carregando...</td>
+            </tr> -->
+            <td>{{c.id}}</td>
+            <td>{{c.pecas.id}}</td>
+            <td><a href="#/itenspecas/editar/{{c.id}}">{{c.descricao}}</a></td>
+            <td>{{c.preco | currency:'R$ '}}</td>
+            <td>{{ c.qtd}}</td>
+            <td>{{ c.total | currency:'R$ '}}</td>
+           <td>
+                <div class="btn-group">
+                  <a href="#/itenspecas/editar/{{c.id}}"><i class="btn btn-default fa fa-edit"></i></a>
+                  <button type="submit" data-ng-click="ItensPecas.remove(c)"><i class="btn btn-danger fa fa-trash-o"></i></button>
+                </div>
+            </td>
+        </tr>
+
+      </table>
+    </div>
+  </div>
+</div>

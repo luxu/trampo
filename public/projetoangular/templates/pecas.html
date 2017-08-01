@@ -1,0 +1,50 @@
+<h2>Listagem das peças</h2>
+<a href="#/pecas/novo/" class="btn btn-danger fa fa-plus">&nbsp;Adicionar Nova Peça</a>
+<div class="table-responsive">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Lista de {{Pecas.titulo}}
+      <div class="sw-search" >
+          <div class="nav-search" id="nav-search">
+              <input placeholder="o que você está procurando?" class="nav-search-input" data-ng-model="searchPecas" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+          </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Data</th>
+            <th>Veículo</th>
+            <th>Troca</th>
+            <th>Próx. Troca</th>
+            <th>Local</th>
+            <th>Comércio</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tr ng-show="Pecas.registros.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Nenhum dado encontrado</td></tr>
+        <tr ng-hide="Pecas.registros.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Carregando...</td></tr>
+        <tr ng-repeat="c in Pecas.registros | filter:searchPecas | orderBy:'-data'" id="{{c.id}}"
+        animate-on-change='c.id + c.data + c.veiculo + c.troca + c.proxtroca + c.local + c.comercio'
+        ng-animate="'animate'">
+            <td>{{c.id}}</td>
+            <td>{{c.data | date:'dd/MM/yyyy'}}</td>
+            <td>{{c.veiculo}}</td>
+            <td>{{ c.troca }}</td>
+            <td>{{ c.proxtroca}}</td>
+            <td>{{ c.local}}</td>
+            <td><a href="#/pecas/{{c.id}}">{{c.comercio}}</a></td>
+            <td><a href="#/itenspecas/{{c.id}}">Itens</a></td>
+           <td>
+                <div class="btn-group">
+                  <a href="#/pecas/editar/{{c.id}}"><i class="btn btn-default fa fa-edit"></i></a>
+                  <button type="submit" data-ng-click="Pecas.remove(c)"><i class="btn btn-danger fa fa-trash-o"></i></button>
+                </div>
+            </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

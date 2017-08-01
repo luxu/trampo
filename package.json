@@ -1,0 +1,16 @@
+{
+  "name": "controle-pessoal",
+  "version": "1.0.0",
+  "description": "This README would normally document whatever steps are necessary to get your application up and running.",
+  "main": "index.js",
+  "scripts": {
+    "dev" : "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://luciano_martins@bitbucket.org/luciano_martins/trampo.git"
+  },
+  "author": "Luciano Martins",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/luciano_martins/trampo#readme"
+}

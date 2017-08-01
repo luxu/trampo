@@ -1,0 +1,79 @@
+<h3>Adicionar novo trampo</h3>
+<p ng-show="Trampo.cadastrado">
+  {{ Trampo.cadastrado.id }} <br>
+  {{ Trampo.cadastrado.nroos }} <br>
+  {{ Trampo.cadastrado.data }} <br>
+  {{ Trampo.cadastrado.ec }} <br>
+  {{ Trampo.cadastrado.conclusao }} <br>
+  {{ Trampo.cadastrado.obs }} <br>
+  {{ Trampo.cadastrado.valor }} <br>
+</p>
+<p class="alert alert-info" ng-show="mensagem.length">{{Trampo.erro}}</p>
+
+<form class="form-horizontal" name="trampo.trampoForm" novalidate>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="nroos">NRO_OS:</label>
+        <div class="col-sm-5">
+            <input type="number" name="nroos" class="form-control"
+                        data-ng-model="Trampo.form.nroos" autofocus required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="data">Data:</label>
+        <div class="col-sm-5">
+            <input type="date" name="data" data-ng-model="Trampo.form.data" required class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="conclusao">Conclusão:</label>
+        <div class="col-sm-5">
+            <select data-ng-model="Trampo.form.conclusao" ng-options="trampo.nome as trampo.conclusao for trampo in Trampo.tipoTrampo" class="form-control">
+                <option value="">Sem Conclusão</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="ec">EC:</label>
+        <div class="col-sm-5">
+            <input type="text" id="ec" name="ec" data-ng-model="Trampo.form.ec" required class="typeahead form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="obs">Obs:</label>
+        <div class="col-sm-5">
+            <textarea rows="3" name="obs" data-ng-model="Trampo.form.obs" class="form-control"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="qtdeec">Qtd EC:</label>
+        <div class="col-sm-5">
+            <input type="number" name="qtdeec" data-ng-model="Trampo.form.qtdeec" class="form-control" ng-init="Trampo.form.qtdeec=1">
+        </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button ng-click='Trampo.submitForm(Trampo.form)' data-ng-disabled="Trampo.editing || Trampo.form.name.$pristine" class="btn btn-large green waves-effect waves-light col s12" type="submit" name="action">CREATE</button>
+        <a href="#/pecas" class="btn btn-default">Voltar</a>
+      </div>
+    </div>
+
+</form>
+
+<script>
+        $('#ec').typeahead({
+                source:  function (query, process) {
+                return $.get('data/completar.php', { query: query }, function (data) {
+                        console.log(data);
+                        data = $.parseJSON(data);
+                        return process(data);
+                    });
+                }
+            });
+</script>

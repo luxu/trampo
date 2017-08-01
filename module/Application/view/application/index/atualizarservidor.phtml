@@ -1,0 +1,92 @@
+<?php
+    session_start();
+
+    $token = "d41d8cd98f00b204e9800998ecf8427e";
+    $senhaAcesso = 'luxu';
+    $tokenValido = false;
+    if(isset($_REQUEST['token']) == $token)
+        $tokenValido = true;
+
+    if(isset($_REQUEST['senhaAcesso']) == $senhaAcesso && empty($_SESSION['usuarioValido']))
+        $_SESSION['usuarioValido'] = true;
+
+    if(isset($_REQUEST['sair']))
+        unset($_SESSION['usuarioValido']);
+    ?>
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <h2 class="text-center">Deploy com GIT</h2>
+                <hr />
+                <?php
+                    if($tokenValido) {
+                        $exec = executaPull();
+                        echo "<pre>".$exec."</pre>";
+                        gravaLog($exec);
+                ?>
+                        <p class="text-center"><a href="/deploy" class="btn btn-primary">Visualizar log completo</a></p>
+                <?php
+                    } else if(isset($_SESSION['usuarioValido'])) {
+                ?>
+                <form action="#" method="post" class="text-center">
+                    <div class="form-group">
+                        <input type="hidden" name="token" value="<?=$token?>">
+                        <input type="submit" value="Atualizar arquivos" class="btn btn-primary">
+                    </div>
+                </form>
+                <?php
+                    if($_SESSION['usuarioValido']) {
+                        ?>
+                        <p class="text-center"><a href="/deploy?sair=true" class="btn btn-primary">Sair</a>
+                        </p>
+                        <?php
+                    }
+                ?>
+                <pre>
+                <?php
+                    exibeLog();
+                ?>
+                </pre>
+                <?php
+                    } else {
+                ?>
+                <form action="/deploy" method="post" class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-8">
+                                <input type="text" class="form-control" placeholder="Senha" name="senhaAcesso">
+                            </div>
+                        </div>
+                        <div class="col-sm-offset-6">
+                            <input type="submit" value="Acessar Deploy" class="btn btn-primary">
+                        </div>
+                </form>
+                <?php
+                    }
+                ?>
+            </div>
+        </div>
+    </div>
+    <?php
+
+        function executaPull() {
+            $exec = shell_exec("git pull origin master 2>&1");
+            return $exec;
+        }
+
+        function gravaLog($exec) {
+            // $textoLog = PHP_EOL."Data: ".date(d."/".m."/".Y." - ".H.":".i.":".s);
+            $textoLog = PHP_EOL."Data: " . date("d/m/Y H:i:s ");
+            $textoLog .= PHP_EOL.$exec;
+
+            $arquivoLog = fopen('log.txt', 'a+');
+            fwrite($arquivoLog, $textoLog);
+            fclose($arquivoLog);
+        }
+
+        function exibeLog() {
+            $texto = file('log.txt');
+            foreach ($texto as $linha) {
+                echo $linha;
+            }
+        }
+    ?>

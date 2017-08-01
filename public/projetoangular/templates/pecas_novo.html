@@ -1,0 +1,84 @@
+<h3>Adicionar nova peça</h3>
+<!-- <p>
+  {{ Pecas.cadastrado.id }} <br>
+  {{ Pecas.cadastrado.data }} <br>
+  {{ Pecas.cadastrado.veiculo }} <br>
+  {{ Pecas.cadastrado.proxtroca }} <br>
+  {{ Pecas.cadastrado.troca }} <br>
+  {{ Pecas.cadastrado.local }} <br>
+  {{ Pecas.cadastrado.comercio }} <br>
+</p> -->
+<p class="alert alert-info" ng-show="mensagem.length">{{ Pecas.erro }}</p>
+<form name="Pecas.pecasForm" class="form-horizontal" novalidate>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="data">Data:</label>
+        <div class="col-sm-5">
+            <input type="date" name="data" id="data" data-ng-model="Pecas.form.data" required class="form-control">
+        </div>
+    </div>
+
+    <!-- <div class="form-group">
+        <label class="col-sm-2 control-label" for="data">Data:</label>
+        <div class="col-sm-5 demo-section k-content">
+            <input type="date" name="data" id="data" ng-model="PecasEditar.pecas.data" required="required" my-date="YYYY-MM-DD">
+        </div>
+    </div> -->
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="veiculo">Veículo:</label>
+        <div class="col-sm-5">
+            <select data-ng-model="Pecas.form.veiculo" data-ng-options="pecas.apelido as pecas.nome for pecas in Pecas.tipoPecas"  class="form-control">
+            <option value="">Escolha o veiculo</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- <div class="form-group">
+      <label class="col-sm-2 control-label" for="veiculo">Veículo:</label>
+      <div class="col-sm-5">
+        <div class="radio" data-ng-repeat="option in Pecas.tipoPecas">
+          <label>
+            <input type="radio" name="veiculo" ng-value="option"
+            data-ng-model="Pecas.tipoPecasSelecionada" />{{ option }}
+          </label>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="troca">Troca:</label>
+        <div class="col-sm-5">
+            <input type="number" name="troca" id="troca" data-ng-model="Pecas.form.troca" class="form-control" data-ng-init="Pecas.form.troca=0">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="proxtroca">Próx. Troca:</label>
+        <div class="col-sm-5">
+            <input type="number" name="proxtroca" id="proxtroca" data-ng-model="Pecas.form.proxtroca" class="form-control" data-ng-init="Pecas.form.proxtroca=0">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="local">Local:</label>
+        <div class="col-sm-5">
+            <input type="text" name="local" id="local" data-ng-model="Pecas.form.local" required data-ng-maxlength="20" class="form-control" >
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="comercio">Comércio:</label>
+        <div class="col-sm-5">
+            <input type="text" name="comercio" id="comercio" data-ng-model="Pecas.form.comercio" required class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button ng-click='Pecas.submitForm(Pecas.form)' data-ng-disabled="Pecas.editing || Pecas.form.name.$pristine" class="btn btn-large green waves-effect waves-light col s12" type="submit" name="action">CREATE</button>
+        <a href="#/pecas" class="btn btn-default">Voltar</a>
+      </div>
+    </div>
+
+</form>

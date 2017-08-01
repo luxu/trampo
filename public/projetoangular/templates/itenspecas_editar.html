@@ -1,0 +1,43 @@
+<h3>Adicionar nova peça</h3>
+<p ng-show="ItensPecas.editado">
+  {{ ItensPecasEditar.editado.id }} <br>
+  {{ ItensPecasEditar.editado.descricao }} <br>
+  {{ ItensPecasEditar.editado.idPecas }} <br>
+  {{ ItensPecasEditar.editado.preco }} <br>
+  {{ ItensPecasEditar.editado.qtd }} <br>
+  {{ ItensPecasEditar.editado.total }} <br>
+</p>
+<p class="alert alert-info" ng-show="mensagem.length">{{ ItensPecasEditar.erro }}</p>
+<form name="ItensPecasEditar.itensPecasForm" class="form-horizontal" novalidate>
+
+    <input type="text" data-ng-model="ItensPecasEditar.form.pecas.id">
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="descricao">Descrição:</label>
+        <div class="col-sm-5">
+            <input type="text" name="descricao" id="descricao" data-ng-model="ItensPecasEditar.form.descricao" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="preco">Preço:</label>
+        <div class="col-sm-5">
+            <input type="text" name="preco" id="preco" data-ng-model="ItensPecasEditar.form.preco" class="form-control" ng-currency>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="qtd">Quant.:</label>
+        <div class="col-sm-5">
+            <input type="text" name="qtd" id="qtd" data-ng-model="ItensPecasEditar.form.qtd" required class="form-control"  data-ng-init="ItensPecasEditar.form.qtd=0">
+        </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button ng-click='ItensPecasEditar.submitForm(ItensPecasEditar.form)' data-ng-disabled="ItensPecasEditar.editing || ItensPecasEditar.form.name.$pristine" class="btn btn-large green waves-effect waves-light col s12" type="submit" name="action">CREATE</button>
+        <a href="#/itenspecas" class="btn btn-default">Voltar</a>
+      </div>
+    </div>
+
+</form>

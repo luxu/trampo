@@ -1,0 +1,61 @@
+<h2>Cadastro de distância percorrida/litro dos veículos</h2>
+<p>
+  {{ Veiculo.cadastrado.id }} <br>
+  {{ Veiculo.cadastrado.data }} <br>
+  {{ Veiculo.cadastrado.veiculo }} <br>
+  {{ Veiculo.cadastrado.kminicial }} <br>
+  {{ Veiculo.cadastrado.distanciapercorrida }} <br>
+  {{ Veiculo.cadastrado.litrosabastecidos }} <br>
+</p>
+<p>
+  {{ Veiculo.erro }}
+</p>
+<form name="Veiculo.veiculoForm" class="form-horizontal">
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="nroos">Data:</label>
+    <div class="col-sm-5">
+      <input type="date" name="data" data-ng-model="Veiculo.form.data" class="form-control" required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="conclusao">Veículo:</label>
+    <div class="col-sm-5">
+      <div class="radio" data-ng-repeat="option in Veiculo.tipoVeiculo">
+        <label>
+          <input type="radio" name="veiculo" ng-value="option" data-ng-model="Veiculo.form.veiculo" />{{ option }}
+        </label>
+      </div>
+    </div>
+  </div>
+  <div>O veículo selecionado é: {{ Veiculo.form.veiculo }}</div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="kminicial">KM Inicial:</label>
+    <div class="col-sm-5">
+      <input type="text" name="kminicial" data-ng-model="Veiculo.form.kminicial" placeholder="KM Inicial" required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="kmfinal">KM Final:</label>
+    <div class="col-sm-5">
+      <input type="text" name="kmfinal" data-ng-model="Veiculo.form.kmfinal" placeholder="KM Final">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="litrosabastecidos">Litros Abastecidos:</label>
+    <div class="col-sm-5">
+      <input type="text" name="litrosabastecidos" data-ng-model="Veiculo.form.litrosabastecidos" placeholder="Litros Abastecidos">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button ng-click='Veiculo.submitForm(Veiculo.form)' data-ng-disabled="Veiculo.editing || Veiculo.form.name.$pristine" class="btn btn-large green waves-effect waves-light col s12" type="submit" name="action">CREATE</button>
+      <a href="#/veiculos" class="btn btn-default">Voltar</a>
+    </div>
+  </div>
+</form>

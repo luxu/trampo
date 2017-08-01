@@ -1,0 +1,56 @@
+<?php $total = 0; ?>
+<div class="container"  ng-controller="TrampoCtrl">
+  <div class="jumbotron">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3>Listar POR DATA</h3>
+      </div>
+      <div class="panel-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <form method="post" ng-submit="consultaPorData(dados)" class="form-inline">
+
+                  <div class="form-group col-sm-6">
+                    <label for="dtInicial">Data Inicial: </label>
+                    <input type="date" id="dtInicial" class="form-control" ng-model="dados.dtInicial">
+                  </div>
+
+                  <div class="form-group col-sm-6">
+                    <label for="dtFinal">Data Final: </label>
+                    <input type="date" id="dtFinal" class="form-control" ng-model="dados.dtFinal">
+                    <div ng-if="dtFinal < dtInicial" style="color:red">
+                      Data Final menor Data Inicial
+                    </div>
+                  </div>
+
+                  <div class="checkbox col-sm-12">
+                    <label ng-repeat="item in listacheckbox" class="checkbox-inline">
+                      <input type="checkbox" checklist-model="dados.item" checklist-value="item" /> {{item.name}}
+                    </label>
+                  </div>
+
+                  <div class="form-group col-sm-12">
+                      <button type="submit" class="btn btn-primary">Pesquisar</button>
+                      <a href="#/trampo" class="btn btn-default">Voltar</a>
+                  </div>
+                </form>
+            </div>
+        </div>
+      </div>
+    </div>
+    </div>
+      <div class="table-responsive"  ng-show="registros.length>0">
+        <table class="table table-condensed table-bordered">
+          <tr ng-show="registros.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x">  </i>&nbsp;Nenhum dado encontrado</td></tr>
+          <tr ng-hide="registros.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Carregando...</td></tr>
+          <tr><th ng-repeat="c in consultas">{{c.text}}</th></tr>
+          <tr dir-paginate="c in registros | itemsPerPage:20 | orderBy:'-id' track by $index" class="warning" id="{{c.id}}" ng-animate="'animate'
+          animate-on-change='c.id + c.data + c.ec + c.nroos + c.conclusao + c.valor' ">
+            <td>{{c.id}}</td><td>{{c.data | date:'dd/MM/yyyy'}}</td><td>{{c.ec}}</td><td>{{c.nroos}}</td> <td>{{c.conclusao}}</td><td>{{c.valor | currency:'R$ '}}</td>
+          </tr>
+        </table>
+        <div><p>Total (R$): {{totalDinheiro | currency:'R$ '}}</p></div>
+        <div><p>Total (Máquinas): {{totalMaquina}}</p></div>
+        <dir-pagination-controls max-size="5" boundary-links="true"></dir-pagination-controls>
+      </div>
+</div>
