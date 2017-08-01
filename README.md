@@ -1,1 +1,2 @@
 # trampo
+Projeto pessoal desenvolvido por mim que serve para controlar os gastos dos meus veículos, as distâncias que percorro com o carro e também quanto ganho no meu "bico" já que ganho por produtividade.
