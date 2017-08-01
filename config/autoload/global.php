@@ -18,7 +18,7 @@ return array(
         'connection_class' => 'login',
         'connection_config' => array(
             'username' => 'contato@luxu.com.br',
-            'password' => '',
+            'password' => 'Luxu1650',
             'ssl' => 'ssl',
             'port' => 465,
             'from' => 'contato@luxu.com.br'

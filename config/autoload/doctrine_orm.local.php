@@ -8,7 +8,7 @@
             'host' => '174.142.161.97',
             'port' => '3306',
             'user' => 'luxucom',
-            'password' => '',
+            'password' => 'L3LCoMux@4BrL#',
             'dbname' => 'luxucom_makinson',
             'driverOptions' => array(
               PDO::MYSQL_ATTR_INIT_COMMAND =>"SET NAMES 'UTF8'"
