@@ -4,7 +4,7 @@ config/
 #data/
 vendor/
 module/Application/language/
-composer.*
+# composer.*
 # public/css/
 # public/fonts/
 # public/data/
