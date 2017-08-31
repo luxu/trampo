@@ -1,0 +1,55 @@
+<h2>Listagem das rotas</h2>
+<a href="#/rotas/novo/" class="btn btn-danger fa fa-plus">&nbsp;Adicionar Nova Rota</a>
+<div class="table-responsive">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Lista de {{Rotas.titulo}}
+      <div class="sw-search" >
+          <div class="nav-search" id="nav-search">
+              <input placeholder="o que você está procurando?" class="nav-search-input" data-ng-model="searchRotas" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+          </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Data</th>
+            <th>Origem</th>
+            <th>Destino</th>
+            <th>Saída</th>
+            <th>Chegada</th>
+            <th>Tempo</th>
+            <th>Km Inicial</th>
+            <th>Km Final</th>
+            <th>Distância</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tr ng-show="Rotas.registros.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Nenhum dado encontrado</td></tr>
+        <tr ng-hide="Rotas.registros.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Carregando...</td></tr>
+      <tbody>
+        <tr dir-paginate="c in Rotas.registros | filter:searchRotas | orderBy:'-id' | itemsPerPage:5" id="{{c.id}}" animate-on-change='c.data + c.cidorigem + c.ciddestino + c.hrsaida + c.hrchegada + c.tempo + c.kminicial + c.kmfinal + c.distancia' ng-animate="'animate'">
+            <td>{{c.id}}</td>
+            <td>{{c.data | date:'dd/MM/yyyy'}}</td>
+            <td>{{c.cidorigem}}</td>
+            <td>{{ c.ciddestino}}</td>
+            <td>{{c.hrsaida | date:'H:i'}}</td>
+            <td>{{c.hrchegada | date:'H:i'}}</td>
+            <td>{{ c.tempo}}</td>
+            <td>{{ c.kminicial}}</td>
+            <td>{{ c.kmfinal}}</td>
+            <td>{{ c.distancia}}</td>
+           <td>
+                <div class="btn-group">
+                  <a href="#/rotas/editar/{{c.id}}"><i class="btn btn-default fa fa-edit"></i></a>
+                  <button type="submit" data-ng-click="Rotas.remove(c)"><i class="btn btn-danger fa fa-trash-o"></i></button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+      </table>
+      <dir-pagination-controls max-size="5" boundary-links="true"></dir-pagination-controls>
+    </div>
+  </div>
+</div>

@@ -1,12 +1,4 @@
 <h3>Adicionar nova peça</h3>
-<p ng-show="ItensPecas.cadastrado">
-  {{ ItensPecas.cadastrado.id }} <br>
-  {{ ItensPecas.cadastrado.descricao }} <br>
-  {{ ItensPecas.cadastrado.idPecas }} <br>
-  {{ ItensPecas.cadastrado.preco }} <br>
-  {{ ItensPecas.cadastrado.qtd }} <br>
-  {{ ItensPecas.cadastrado.total }} <br>
-</p>
 <p class="alert alert-info" ng-show="mensagem.length">{{ ItensPecas.erro }}</p>
 <form name="ItensPecas.itensPecasForm" class="form-horizontal" novalidate>
 
@@ -35,8 +27,8 @@
 
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button ng-click='ItensPecas.submitForm(ItensPecas.form)' data-ng-disabled="ItensPecas.editing || ItensPecas.form.name.$pristine" class="btn btn-large green waves-effect waves-light col s12" type="submit" name="action">CREATE</button>
-        <a href="#/itenspecas" class="btn btn-default">Voltar</a>
+        <button ng-click='ItensPecas.submitForm(ItensPecas.form)' data-ng-disabled="ItensPecas.editing || ItensPecas.form.descricao.$pristine" class="btn btn-primary btn-large" type="submit" name="action">SALVAR</button>
+        <a href="#/itenspecas/{{ItensPecas.form.idPecas}}" class="btn btn-default">Voltar</a>
       </div>
     </div>
 

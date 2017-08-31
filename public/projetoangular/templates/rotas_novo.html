@@ -1,0 +1,80 @@
+<h2>Cadastro de rotas</h2>
+<p>{{ Rotas.erro }}</p>
+<form name="Rotas.veiculoForm" class="form-horizontal">
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="data">Data:</label>
+        <div class="col-sm-5">
+            <input type="date" data-ng-model="Rotas.form.data" required class="form-control">
+        </div>
+    </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="cidorigem">Cidade-Origem:</label>
+    <div class="col-sm-2">
+      <input type="search" ng-model="buscaOrigem" class="form-control">
+    </div>
+    <div class="col-sm-3">
+      <select data-ng-model="Rotas.form.cidorigem" ng-options="value.label as value.label group by value.group for value in Rotas.tipoCidades | filter:buscaOrigem" class="form-control">
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="ciddestino">Cidade-Destino:</label>
+    <div class="col-sm-2">
+      <input type="search" ng-model="buscaDestino" class="form-control">
+    </div>
+    <div class="col-sm-3">
+      <select data-ng-model="Rotas.form.ciddestino" ng-options="value.label as value.label group by value.group for value in Rotas.tipoCidades | filter:buscaDestino" class="form-control">
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="hrsaida">Hora de saida:</label>
+      <div class="col-sm-5">
+        <select data-ng-model="Rotas.form.saidahr" ng-options="rotas.hora for rotas in Rotas.horas"
+        class="form-control"></select>
+      </div>
+      <div class="col-sm-5">
+        <select data-ng-model="Rotas.form.saidamin" ng-options="rotas.minuto for rotas in Rotas.minutos"
+        class="form-control"></select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="hrsaida">Hora de chegada:</label>
+      <div class="col-sm-5">
+        <select data-ng-model="Rotas.form.chegadahr" ng-options="rotas.hora for rotas in Rotas.horas"
+        class="form-control"></select>
+      </div>
+      <div class="col-sm-5">
+        <select data-ng-model="Rotas.form.chegadamin" ng-options="rotas.minuto for rotas in Rotas.minutos"
+        class="form-control"></select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="kminicial">KM Inicial:</label>
+    <div class="col-sm-5">
+      <input type="text" name="kminicial" data-ng-model="Rotas.form.kminicial" placeholder="KM Inicial" required
+      ng-init="Rotas.form.kminicial=157">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="kmfinal">KM Final:</label>
+    <div class="col-sm-5">
+      <input type="text" name="kmfinal" data-ng-model="Rotas.form.kmfinal" placeholder="KM Final"
+      ng-init="Rotas.form.kmfinal=157">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button ng-click='Rotas.submitForm(Rotas.form)' data-ng-disabled="Rotas.editing || Rotas.form.nome.$pristine" class="btn btn-primary btn-large " type="submit" name="action">Salvar</button>
+      <a href="#/rotas" class="btn btn-default">Voltar</a>
+    </div>
+  </div>
+</form>

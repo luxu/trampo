@@ -24,6 +24,7 @@ return array(
             'itenspecas' => 'SONRest\Controller\ItensPecasController',
             'listaritenspecas' => 'SONRest\Controller\ListarItensPecasController',
             'veiculo' => 'SONRest\Controller\VeiculoController',
+            'rotas' => 'SONRest\Controller\RotasController',
             'usuarios' => 'SONRest\Controller\UsuariosController',
         )
     ),

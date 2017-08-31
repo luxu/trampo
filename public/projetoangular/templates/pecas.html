@@ -21,7 +21,6 @@
             <th>Local</th>
             <th>Comércio</th>
             <th></th>
-            <th></th>
           </tr>
         </thead>
         <tr ng-show="Pecas.registros.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Nenhum dado encontrado</td></tr>
@@ -35,11 +34,10 @@
             <td>{{ c.troca }}</td>
             <td>{{ c.proxtroca}}</td>
             <td>{{ c.local}}</td>
-            <td><a href="#/pecas/{{c.id}}">{{c.comercio}}</a></td>
+            <td><a href="#/pecas/editar/{{c.id}}">{{c.comercio}}</a></td>
             <td><a href="#/itenspecas/{{c.id}}">Itens</a></td>
            <td>
                 <div class="btn-group">
-                  <a href="#/pecas/editar/{{c.id}}"><i class="btn btn-default fa fa-edit"></i></a>
                   <button type="submit" data-ng-click="Pecas.remove(c)"><i class="btn btn-danger fa fa-trash-o"></i></button>
                 </div>
             </td>

@@ -1,0 +1,93 @@
+<h2>Alteraçao de rotas</h2>
+<p>
+  {{ RotasEditar.form.id }} <br>
+  {{ RotasEditar.form.data }} <br>
+  {{ RotasEditar.form.cidorigem }} <br>
+  {{ RotasEditar.form.ciddestino }} <br>
+  {{ RotasEditar.form.hrchegada }} <br>
+  {{ RotasEditar.form.hrsaida }} <br>
+  {{ RotasEditar.form.kminicial }} <br>
+  {{ RotasEditar.form.kmfinal }} <br>
+</p>
+<p class="alert alert-info" ng-show="mensagem.length">{{ RotasEditar.erro }}</p>
+
+<form name="RotasEditar.veiculoForm" class="form-horizontal">
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="data">Data:</label>
+        <div class="col-sm-5">
+            <input type="date" data-ng-model="RotasEditar.form.data" required class="form-control">
+        </div>
+    </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="cidorigem">Cidade-Origem:</label>
+    <div class="col-sm-2">
+      <input type="search" ng-model="buscaOrigem" class="form-control">
+    </div>
+    <div class="col-sm-3">
+      <select data-ng-model="RotasEditar.form.cidorigem" ng-options="value.label as value.label group by value.group for value in RotasEditar.tipoCidades | filter:buscaOrigem" class="form-control">
+      <option ng-selected="RotasEditar.form.cidorigem">{{RotasEditar.form.cidorigem}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="ciddestino">Cidade-Destino:</label>
+    <div class="col-sm-2">
+      <input type="search" ng-model="buscaDestino" class="form-control">
+    </div>
+    <div class="col-sm-3">
+      <select data-ng-model="RotasEditar.form.ciddestino" ng-options="value.label as value.label group by value.group for value in RotasEditar.tipoCidades | filter:buscaDestino"  class="form-control">
+      <option ng-selected="RotasEditar.form.ciddestino">{{RotasEditar.form.ciddestino}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="hrsaida">Hora de saida:</label>
+      <div class="col-sm-5">
+        <select data-ng-model="RotasEditar.form.saidahr" ng-options="rotas.hora as rotas.hora for rotas in RotasEditar.horas"
+        class="form-control">
+        <option ng-selected="RotasEditar.form.saidahr">{{RotasEditar.form.saidahr}}</option>
+        </select>
+      </div>
+      <div class="col-sm-5">
+        <select data-ng-model="RotasEditar.form.saidamin" ng-options="rotas.minuto for rotas in RotasEditar.minutos"
+        class="form-control"></select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="chegadahr">Hora de chegada:</label>
+      <div class="col-sm-5">
+        <select data-ng-model="RotasEditar.form.chegadahr" ng-options="rotas.hora for rotas in RotasEditar.horas"
+        class="form-control"></select>
+      </div>
+      <div class="col-sm-5">
+        <select data-ng-model="RotasEditar.form.chegadamin" ng-options="rotas.minuto for rotas in RotasEditar.minutos"
+        class="form-control"></select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="kminicial">KM Inicial:</label>
+    <div class="col-sm-5">
+      <input type="text" name="kminicial" data-ng-model="RotasEditar.form.kminicial" required >
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="kmfinal">KM Final:</label>
+    <div class="col-sm-5">
+      <input type="text" name="kmfinal" data-ng-model="RotasEditar.form.kmfinal" >
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button ng-click='RotasEditar.submitForm(RotasEditar.form)' data-ng-disabled="RotasEditar.editing || RotasEditar.form.nome.$pristine" class="btn btn-primary btn-large " type="submit" name="action">Salvar</button>
+      <a href="#/rotas" class="btn btn-default">Voltar</a>
+    </div>
+  </div>
+</form>

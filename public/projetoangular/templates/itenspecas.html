@@ -25,7 +25,6 @@
         <tr ng-show="ItensPecas.registros==0">
           <td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Nenhum dado encontrado</td>
         </tr>
-
         <tr
         ng-repeat="c in ItensPecas.registros | filter:searchItensPecas | orderBy:'-data'" id="{{c.id}}"
         animate-on-change='c.id + c.pecas.id + c.descricao + c.preco + c.total + c.qtd'

@@ -1,5 +1,5 @@
 <h2>Listagem dos veículos</h2>
-<a href="#/veiculos/novo/" class="btn btn-danger fa fa-plus">&nbsp;Adicionar Novo Veiculo</a>
+<a href="#/veiculo/novo/" class="btn btn-danger fa fa-plus">&nbsp;Adicionar Novo Veiculo</a>
 <div class="table-responsive">
   <div class="panel panel-primary">
     <div class="panel-heading">Lista de {{Veiculo.titulo}}
@@ -43,7 +43,7 @@
             <td>{{ c.litrosabastecidos}}</td>
             <td>
               <div class="btn-group">
-                <a href="#/veiculos/editar/{{c.id}}">
+                <a href="#/veiculo/editar/{{c.id}}">
                   <i class="btn btn-default fa fa-edit"></i>
                 </a>
                 <button type="submit" data-ng-click="Veiculo.remove(c)"><i class="btn btn-danger fa fa-trash-o"></i></button>
@@ -58,5 +58,3 @@
 </div>
 </div>
 </div>
-<button data-ng-click="Veiculo.orderByName()" class="btn btn-large animate black waves-effect waves-light col s12" type="submit" name="action">Order Name</button>
-<button data-ng-click="Veiculo.orderByEmail()" class="btn btn-large animate black waves-effect waves-light col s12" type="submit" name="action">Order Email</button>

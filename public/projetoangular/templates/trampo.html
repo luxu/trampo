@@ -31,13 +31,12 @@
           <tr dir-paginate="c in Trampo.registros | filter:searchTrampo | orderBy:'-id' | itemsPerPage:10" id="{{c.id}}" animate-on-change='c.nroos + c.data + c.ec + c.conclusao + c.obs + c.valor' ng-animate="'animate'">
             <td>{{c.nroos}}</td>
             <td>{{c.data | date:'dd/MM/yyyy'}}</td>
-            <td><a href="#/trampo/{{c.id}}">{{c.ec}}</a></td>
+            <td><a href="#/trampo/editar/{{c.id}}">{{c.ec}}</a></td>
             <td>{{c.conclusao}}</td>
             <!-- <td>{{c.obs}}</td> -->
             <td>{{c.valor | currency:'R$ '}}</td>
             <td>
                 <div class="btn-group btn-group-xs">
-                  <a href="#/trampo/editar/{{c.id}}"><i class="fa fa-edit btn btn-default btn-xs"></i></a>
                   <button type="submit" data-ng-click="Trampo.remove(c)"><i class="fa fa-trash-o btn btn-danger btn-xs"></i></button>
                 </div>
             </td>

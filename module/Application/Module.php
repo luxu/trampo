@@ -43,6 +43,11 @@ class Module
                       $veiculoService = new \Application\Service\Veiculo($em);
                       return $veiculoService;
               },
+              'Application\Service\Rotas' => function($sm) {
+                      $em = $sm->get('Doctrine\ORM\EntityManager');
+                      $rotasService = new \Application\Service\Rotas($em);
+                      return $rotasService;
+              },
               'Application\Service\Usuarios' => function($sm) {
                       $em = $sm->get('Doctrine\ORM\EntityManager');
                       $usuariosService = new \Application\Service\Usuarios($em);

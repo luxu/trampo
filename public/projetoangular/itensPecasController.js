@@ -1,7 +1,7 @@
 function ItensPecasService($http) {
   const BASE_URL = '/api/itenspecas/';
+
   this.list = function($idPecas) {
-    $idPecas = $idPecas;
     const request = {
       url: BASE_URL  + $idPecas,
       method: 'GET'
@@ -9,22 +9,22 @@ function ItensPecasService($http) {
     return $http(request);
   }
 
-  this.novo = function(itenspecas) {
+  this.listar = function(id) {
+      const request = {
+        url: BASE_URL + id,
+        method: 'GET'
+      }
+    return $http(request);
+  }
+
+  this.salvar = function(itenspecas) {
       const request = {
         url: BASE_URL,
         method: 'POST',
         data: itenspecas
       }
       return $http(request);
-    }
-
-  this.editar = function(itenspecas) {
-      const request = {
-        url: BASE_URL + 'editar/' + itenspecas.id,
-        method: 'GET'
-      }
-      return $http(request);
-    }
+  }
 
   this.remove = function(itenspecas) {
       const request = {
@@ -35,55 +35,57 @@ function ItensPecasService($http) {
     }
 }
 
-/*
-function IdPecasService($routerParams) {
-    // var vm = this;
-    id = null;
-    return {
-        setIDPecas: setIDPecas,
-        getIDPecas: getIDPecas
-    };
+function ItensPecasController($routeParams,ItensPecasService) {
 
-    function setIDPecas($routerParams) {
-        id = $routerParams.id;
-    };
-
-    function getIDPecas() {
-        return id
-    };
-}
-IdPecasService.$inject = ['$routerParams'];
-*/
-
-function ItensPecasController($routeParams,$http) {
       var vm = this;
       vm.registros = [];
-      vm.idPecas = $routeParams.id;
-      // vm.idPecas = IdPecasService.getIDPecas;
-      // const url = '/api/itenspecas/'+$routeParams.idPecas;
-      const url = '/api/itenspecas/'+vm.idPecas;
-      // const url = '/api/itenspecas/'+ vm.idPecas;
-      const method = 'GET';
-
-      $http({
-        url: url,
-        method: method
-      })
-      .then(
-          function success(data) {
-              console.log('Data: ', data.data);
-              if(data.data != false)
-                vm.registros = data.data;
-              else vm.registros = 0;
-          },
-          function fail(err) {
-            console.log('Erro: ', err);
+      vm.editing = false;
+      vm.reverse = true;
+      vm.titulo = "Peças";
+      vm.modelOptions = {
+          updateOn: 'blur default'
+        , debounce: {
+            default: 1000
+          , blur: 0
           }
-      );
-    }
-ItensPecasController.$inject = ['$routeParams','$http'];
+      }
 
-function ItensPecasNovoController($routeParams,$http) {
+      ItensPecasService
+      .list($routeParams.idPecas)
+      .then(
+      function success(data) {
+        console.log('Data: ', data.data);
+        vm.registros = data.data;
+        },
+        function fail(err) {
+            console.log('Erro - ItensPecasController: ', err);
+        });
+
+      vm.remove = remove;
+      function remove(itenspecas) {
+        const filtrarPecasRemovido = function(el){
+          return itenspecas.id !== el.id;
+        }
+        if(confirm('Deseja REALMENTE remover esse usuário?')) {
+          ItensPecasService
+          .remove(itenspecas)
+          .then(
+            function success(data) {
+              // console.log('REMOVIDO: ', data);
+              // if(data.n == 1) vm.pecass = vm.pecass.filter(filtrarPecasRemovido);
+              vm.registros = vm.registros.filter(filtrarPecasRemovido);
+              console.log('FILTRADOS: ', vm.registros);
+              },
+              function fail(err) {
+                console.log('Erro: ', err);
+            });
+          }
+        else alert('UFA! Ainda bem!');
+      }
+    }
+ItensPecasController.$inject = ['$routeParams','ItensPecasService'];
+
+function ItensPecasNovoController($routeParams,ItensPecasService) {
 
   var vm = this;
   vm.idPecas = $routeParams.idPecas;
@@ -106,6 +108,7 @@ function ItensPecasNovoController($routeParams,$http) {
             function success(data) {
             console.log('Data: ', data.data);
             vm.cadastrado = data.data;
+            $location.path('/itenspecas/' + data.data.pecas.id);
             },
             function fail(err) {
                 console.log('Erro: ', err);
@@ -115,33 +118,47 @@ function ItensPecasNovoController($routeParams,$http) {
 }
 ItensPecasNovoController.$inject = ['$routeParams','$http'];
 
-function ItensPecasEditarController($routeParams,$http) {
+function ItensPecasEditarController($location,ItensPecasService, $routeParams) {
   var vm = this;
-  vm.id = $routeParams.id;
   vm.editing = false;
   vm.reverse = false;
-  vm.tipoPecasEditar = [];
 
-  const url = '/api/listaritenspecas/'+vm.id;
-  const method = 'GET';
-  $http({
-    url: url,
-    method: method
-  })
-  .then(
+  ItensPecasService
+      .listar($routeParams.id)
+      .then(
+        function success(data) {
+          console.log('Editar - data: ', data.data);
+          vm.form = {
+                  descricao:data.data.descricao,
+                  preco:data.data.preco,
+                  qtd:data.data.qtd,
+                  idPecas:data.data.pecas.id,
+          };
+        },
+        function fail(err) {
+          console.log('Erro - Editar: ', err);
+        }
+    );
+
+  vm.submitForm = submitForm;
+  function submitForm(itenspecas) {
+      console.log('Editar - submitForm', itenspecas);
+
+    ItensPecasService
+    .salvar(itenspecas)
+    .then(
       function success(data) {
-        console.log('Data: ', data.data);
-        vm.pecas = data.data;
-        // vm.tipoPecasEditarSelecionada = data.data.veiculo;
-        vm.form = angular.copy(vm.pecas);
-        vm.editing = true;
+        console.log('Editar: ', data);
+        vm.itenspecas = data;
       },
       function fail(err) {
-        console.log('Erro - Editar: ', err);
+        console.log('Erro: ', err);
+        vm.erro = err;
       }
-  );
+    );
+  }
 }
-ItensPecasEditarController.$inject = ['$routeParams','$http'];
+ItensPecasEditarController.$inject = ['$location','ItensPecasService', '$routeParams'];
 
 function ItensPecasDetailsController($http, $routeParams) {
   var vm = this;
@@ -186,20 +203,9 @@ angular.module('ItensPecas', ['angularUtils.directives.dirPagination','ng-curren
         controller: 'ItensPecasEditarController',
         controllerAs: 'ItensPecasEditar'
       })
-      // .when('/itenspecas/:id', {
-      //   templateUrl: 'projetoangular/templates/itenspecas-details.html',
-      //   controller: 'ItensPecasDetailsController',
-      //   controllerAs: 'PecasDetails'
-      // });
   }])
   .service('ItensPecasService', ItensPecasService)
-  // .service('IdPecasService', ['$routeParams',IdPecasService])
-  // .directive('myDate', ['$timeout', '$filter', myDate])
-  .controller('ItensPecasController', ['$routeParams','$http',ItensPecasController])
-  // .controller('ItensPecasController', ['IdPecasService',ItensPecasController])
-  // .controller('ItensPecasController', ItensPecasController)
+  .controller('ItensPecasController', ['$routeParams','ItensPecasService',ItensPecasController])
   .controller('ItensPecasDetailsController', ItensPecasDetailsController)
-  .controller('ItensPecasNovoController', ['$routeParams','$http', ItensPecasNovoController])
-  // .controller('ItensPecasNovoController', ['ItensPecasService', 'IdPecasService', ItensPecasNovoController])
-  // .controller('PecasEditarController', ['PecasService', PecasEditarController]);
-  .controller('ItensPecasEditarController', ['$routeParams','$http',ItensPecasEditarController]);
+  .controller('ItensPecasNovoController', ['$routeParams','$http','$location', ItensPecasNovoController])
+  .controller('ItensPecasEditarController', ['$location','ItensPecasService','$routeParams',ItensPecasEditarController]);

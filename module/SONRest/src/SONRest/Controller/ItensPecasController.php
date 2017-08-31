@@ -10,10 +10,10 @@ class ItensPecasController extends AbstractRestfulController  {
     // get
     public function get($id)  {
 
+        echo "CHEGOU...";
         $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-
+        // $data = $em->getRepository('Application\Entity\ItensPecas')->find($id);
         $data = $em->getRepository('Application\Entity\ItensPecas')->getItensPecas($id);
-
         return $data;
     }
 
@@ -24,11 +24,18 @@ class ItensPecasController extends AbstractRestfulController  {
         $dados['total'] = $dados['preco'] * $dados['qtd'];
 
         $ItensPecas = $serviceItensPecas->insert($dados);
-        if($ItensPecas) {
-            return $ItensPecas;
-        } else {
-            return array('success'=>false);
-        }
+
+       if(isset($dados['id'])) {
+           $ItensPecas = $serviceItensPecas->update($dados);
+       } else {
+           $ItensPecas = $serviceItensPecas->insert($dados);
+       }
+
+       if($ItensPecas) {
+           return new JsonModel(array('data'=>array('idPecas'=>$ItensPecas->getPecas(),'success'=>true)));
+       } else {
+           return new JsonModel(array('data'=>array('success'=>false)));
+       }
 
     }
 

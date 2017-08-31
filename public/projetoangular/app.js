@@ -7,8 +7,8 @@ angular.module('myApp',
     'Pecas',
     'Trampo',
     'ItensPecas',
+    'Rotas',
     'Login',
-    // 'kendo.directives'
     ])
     .config(['$routeProvider','$locationProvider', function($routeProvider,$locationProvider) {
              $locationProvider.hashPrefix(''),

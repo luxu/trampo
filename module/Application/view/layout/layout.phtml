@@ -25,15 +25,16 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
-                          <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastro <span class="caret"></span></a>
+                          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastro <span class="caret"></span></a>
                           <ul class="dropdown-menu">
                             <li><a data-toggle="collapse" data-target=".navbar-collapse" href="#/trampo">Trampo</a></li>
                             <li><a data-toggle="collapse" data-target=".navbar-collapse" href="#/pecas">Peças</a></li>
                             <li><a data-toggle="collapse" data-target=".navbar-collapse" href="#/veiculo">Veículo</a></li>
+                            <li><a data-toggle="collapse" data-target=".navbar-collapse" href="#/rotas">Rotas</a></li>
                           </ul>
                         </li>
                         <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Consulta <span class="caret"></span></a>
+                          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Consulta <span class="caret"></span></a>
                           <ul class="dropdown-menu">
                             <li><a href="#/trampo/listarPorData">por Data</a></li>
                             <li><a href="#">por Mês</a></li>
@@ -41,9 +42,10 @@
                           </ul>
                         </li>
                         <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Imprimir <span class="caret"></span></a>
+                          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Imprimir <span class="caret"></span></a>
                           <ul class="dropdown-menu">
                             <li><a href="/producaomes">Produção MES</a></li>
+                            <li><a href="/api/pecas">Carregar peças</a></li>
                           </ul>
                         </li>
                     </ul>
@@ -79,13 +81,12 @@
 <script src="js/bootstrap3-typeahead.min.js"></script>
 <script src="https://rawgit.com/aguirrel/ng-currency/latest/dist/ng-currency.js"></script>
 
-
 <script src="projetoangular/app.js"></script>
 <script src="projetoangular/veiculoController.js"></script>
-<!-- <script src="projetoangular/veiculoSrv.js"></script> -->
 <script src="projetoangular/pecasController.js"></script>
 <script src="projetoangular/trampoController.js"></script>
 <script src="projetoangular/itensPecasController.js"></script>
+<script src="projetoangular/rotasController.js"></script>
 <script src="projetoangular/loginController.js"></script>
 
 </body>

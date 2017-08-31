@@ -30,8 +30,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label" for="conclusao">Conclusão:</label>
         <div class="col-sm-5">
-            <select data-ng-model="Trampo.form.conclusao" ng-options="trampo.nome as trampo.conclusao for trampo in Trampo.tipoTrampo" class="form-control">
-                <option value="">Sem Conclusão</option>
+            <select data-ng-model="Trampo.form.conclusao" ng-options="trampo.nome for trampo in Trampo.tipoTrampo" class="form-control">
             </select>
         </div>
     </div>
@@ -59,8 +58,8 @@
 
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button ng-click='Trampo.submitForm(Trampo.form)' data-ng-disabled="Trampo.editing || Trampo.form.name.$pristine" class="btn btn-large green waves-effect waves-light col s12" type="submit" name="action">CREATE</button>
-        <a href="#/pecas" class="btn btn-default">Voltar</a>
+        <button ng-click='Trampo.submitForm(Trampo.form)' data-ng-disabled="Trampo.editing || Trampo.form.nroos.$pristine" class="btn btn-large btn-primary" type="submit" name="action">SALVAR</button>
+        <a href="#/trampo" class="btn btn-default">Voltar</a>
       </div>
     </div>
 

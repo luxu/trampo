@@ -29,20 +29,23 @@ class TrampoController extends AbstractRestfulController
     }
 
     // post
-    public function create($dados)
-    {
+    public function create($dados) {
 
         $serviceTrampo = $this->getServiceLocator()->get('Application\Service\Trampo');
-        $qtdec = $dados['qtdeec'];
 
-        for ($i=0; $i < $qtdec; $i++) {
-                $trampo = $serviceTrampo->insert($dados);
+        if(isset($dados['id'])) {
+            $trampo = $serviceTrampo->update($dados);
+        } else {
+            $qtdec = $dados['qtdeec'];
+            for ($i=0; $i < $qtdec; $i++) {
+                    $trampo = $serviceTrampo->insert($dados);
+            }
         }
 
         if($trampo) {
-            return $trampo;
+            return new JsonModel(array('data'=>array('id'=>$trampo->getId(),'success'=>true)));
         } else {
-            return array('success'=>false);
+            return new JsonModel(array('data'=>array('success'=>false)));
         }
 
     }

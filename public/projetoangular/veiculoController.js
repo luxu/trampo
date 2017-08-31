@@ -160,27 +160,24 @@ function VeiculoController(VeiculoService) {
 angular.module('Veiculo', ['angularUtils.directives.dirPagination'])
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
-      .when('/veiculos', {
+      .when('/veiculo', {
         templateUrl: 'projetoangular/templates/veiculo.html',
         controller: 'VeiculoController',
         controllerAs: 'Veiculo'
       })
-      .when('/veiculos/novo', {
+      .when('/veiculo/novo', {
         templateUrl: 'projetoangular/templates/veiculo_novo.html',
         controller: 'VeiculoNovoController',
         controllerAs: 'Veiculo'
       })
-/*
-      .when('/veiculos/editar/:id', {
+      .when('/veiculo/editar/:id', {
         templateUrl: 'projetoangular/templates/veiculo_editar.html',
         controller: 'VeiculoEditarController',
         controllerAs: 'VeiculoEditar'
-      })
-*/
-      ;
+      });
   }])
   .service('VeiculoService', VeiculoService)
   .controller('VeiculoController', ['VeiculoService', VeiculoController])
-  .controller('VeiculoNovoController', ['VeiculoService', VeiculoNovoController])
+  .controller('VeiculoNovoController', ['VeiculoService', VeiculoNovoController]);
   // .controller('VeiculoEditarController', ['VeiculoService', VeiculoEditarController])
 

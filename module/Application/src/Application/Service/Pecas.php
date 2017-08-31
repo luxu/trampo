@@ -20,7 +20,7 @@ class Pecas
         $pecasEntity = new PecasEntity;
         $date = new \DateTime($dados['data']);
         $pecasEntity->setData($date);
-        $pecasEntity->setVeiculo($dados['veiculo']);
+        $pecasEntity->setVeiculo($dados['veiculo']['nome']);
         $pecasEntity->setProxTroca($dados['proxtroca']);
         $pecasEntity->setTroca($dados['troca']);
         $pecasEntity->setLocal($dados['local']);
@@ -35,11 +35,11 @@ class Pecas
     public function update(array $dados)
     {
         $pecasEntity = $this->em
-            ->getReference('Application\Entity\Pecas', $dados['idpecas']);
+            ->getReference('Application\Entity\Pecas', $dados['id']);
 
         $date = new \DateTime($dados['data']);
         $pecasEntity->setData($date);
-        $pecasEntity->setVeiculo($dados['veiculo']);
+        $pecasEntity->setVeiculo($dados['veiculo']['nome']);
         $pecasEntity->setProxTroca($dados['proxtroca']);
         $pecasEntity->setTroca($dados['troca']);
         $pecasEntity->setLocal($dados['local']);

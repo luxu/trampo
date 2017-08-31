@@ -1,16 +1,9 @@
 <h3>Editar Trampo</h3>
-<p ng-show="Trampo.editado">
-  {{ Trampo.editado.id }} <br>
-  {{ Trampo.editado.nroos }} <br>
-  {{ Trampo.editado.data }} <br>
-  {{ Trampo.editado.ec }} <br>
-  {{ Trampo.editado.conclusao }} <br>
-  {{ Trampo.editado.obs }} <br>
-  {{ Trampo.editado.valor }} <br>
-</p>
-<p class="alert alert-info" ng-show="mensagem.length">{{Trampo.erro}}</p>
+<p class="alert alert-info" ng-show="mensagem.length">{{TrampoEditar.erro}}</p>
 
-<form name="TrampoEditar.trampoForm" class="form-horizontal" data-ng-init="get()" novalidate>
+<form name="TrampoEditar.trampoForm" class="form-horizontal" novalidate>
+
+    <input type="hidden" data-ng-model="TrampoEditar.form.id">
 
     <div class="form-group">
         <label class="col-sm-2 control-label" for="nroos">NRO_OS:</label>
@@ -22,15 +15,17 @@
     <div class="form-group">
         <label class="col-sm-2 control-label" for="data">Data:</label>
         <div class="col-sm-5">
-            <input type="text" id="data" ng-model="TrampoEditar.form.data" class="form-control" my-date="YYYY-MM-DD" required>
+            <input type="date" ng-model="TrampoEditar.form.data" class="form-control" required>
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-sm-2 control-label" for="conclusao">Conclusão:</label>
         <div class="col-sm-5">
-            <select ng-model="TrampoEditar.form.conclusao" class="form-control">
-                <option ng-repeat="x in conclusao  | orderBy:'-type'" ng-value="x.label">{{x.label}}</option>
+            <select data-ng-model="TrampoEditar.form.conclusao"
+                    ng-options="trampoEditar.nome as trampoEditar.conclusao for trampoEditar in TrampoEditar.tipoTrampo"
+                    class="form-control">
+                <option value="">{{TrampoEditar.form.conclusao}}</option>
             </select>
         </div>
     </div>
@@ -51,8 +46,10 @@
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-          <button ng-click='TrampoEditar.submitForm(TrampoEditar.form)' data-ng-disabled="TrampoEditar.editing || TrampoEditar.form.name.$pristine" class="btn btn-large green waves-effect waves-light col s12" type="submit" name="action">CREATE</button>
-          <a href="#/veiculos" class="btn btn-default">Voltar</a>
+          <button ng-click="TrampoEditar.submitForm(TrampoEditar.form)"
+                  data-ng-disabled="TrampoEditar.editing || TrampoEditar.form.nroos.$pristine"
+                  class="btn btn-primary btn-large" type="submit">Atualizar</button>
+          <a href="#/trampo" class="btn btn-default">Voltar</a>
         </div>
     </div>
 </form>
